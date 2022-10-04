@@ -16,9 +16,9 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(cors()); // ทำให้ server รับ req ที่มาจากต่าง domain ได้ (sharing ข้อมูลข้าม Domain หรือ ข้าม origin)
+app.use(express.json()); // แปลงข้อมูลที่มีรูปแบบ JSON String ให้อยู่ในรูป JSON Object
+app.use(express.urlencoded({ extended: false })); // แปลงข้อมูลจาก form ในรูปแบบ url encode เป็น Object
 
 app.use("/auth", authRoute);
 

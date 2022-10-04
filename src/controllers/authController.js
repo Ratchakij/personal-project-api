@@ -12,15 +12,8 @@ const genToken = (payload) =>
 
 exports.register = async (req, res, next) => {
   try {
-    const {
-      userName,
-      password,
-      confirmPassword,
-      email,
-      mobile,
-      firstName,
-      lastName,
-    } = req.body;
+    const { firstName, lastName, email, mobile, password, confirmPassword } =
+      req.body;
 
     if (!email && !mobile) {
       throw new AppError("Email & Mobile required", 400);
@@ -36,7 +29,6 @@ exports.register = async (req, res, next) => {
 
     const isEmail = validator.isEmail(email + "");
     const isMobile = validator.isMobilePhone(mobile + "", "th-TH");
-    console.log(isMobile);
 
     if (!isEmail || !isMobile || isMobile === false) {
       throw new AppError("Email or Mobile is invalid", 400);
@@ -45,12 +37,11 @@ exports.register = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const user = await User.create({
-      userName,
-      password: hashedPassword,
-      email,
-      mobile,
       firstName,
       lastName,
+      email,
+      mobile,
+      password: hashedPassword,
     });
 
     const token = genToken({

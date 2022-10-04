@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
       },
+      productImage: DataTypes.STRING,
     },
     {
       timestamps: false, // add columns createdAt updatedAt
