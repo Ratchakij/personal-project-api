@@ -8,7 +8,7 @@ const notFound = require("./middlewares/notFound");
 const error = require("./middlewares/error");
 
 // const { sequelize } = require("./models");
-// sequelize.sync({ alter: true });
+// sequelize.sync({ force: true });
 
 const app = express();
 
