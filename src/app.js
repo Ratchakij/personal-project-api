@@ -4,6 +4,8 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const authRoute = require("./routes/authRoute");
+const productRoute = require("./routes/productRoute");
+
 const notFound = require("./middlewares/notFound");
 const error = require("./middlewares/error");
 
@@ -21,6 +23,7 @@ app.use(express.json()); // แปลงข้อมูลที่มีรู�
 app.use(express.urlencoded({ extended: false })); // แปลงข้อมูลจาก form ในรูปแบบ url encode เป็น Object
 
 app.use("/auth", authRoute);
+app.use("/product", productRoute);
 
 app.use(notFound);
 app.use(error);
