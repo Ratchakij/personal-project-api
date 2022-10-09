@@ -1,16 +1,29 @@
 const fs = require("fs");
 const AppError = require("../utils/appError");
+const cloudinary = require("../utils/cloudinary");
 
 const { Product } = require("../models");
 
 exports.createProduct = async (req, res, next) => {
   try {
-    const { name, productImage } = req.body;
+    const { name } = req.body;
     const price = +req.body.price;
     const quantity = +req.body.quantity;
+    const file = req.file;
     const data = {};
 
-    // console.log(req.body);
+    let productImage;
+    if (file) {
+      const secureUrl = await cloudinary.upload(
+        file.path,
+        productImage ? cloudinary.getPublicId(productImage) : null
+      );
+
+      productImage = secureUrl;
+      data.productImage = productImage;
+
+      fs.unlinkSync(file.path);
+    }
 
     if (name) {
       data.name = name;
@@ -26,6 +39,7 @@ exports.createProduct = async (req, res, next) => {
     }
 
     const product = await Product.create(data);
+
     res.status(201).json({ product });
   } catch (err) {
     next(err);
@@ -37,6 +51,13 @@ exports.getAllProduct = async (req, res, next) => {
     const product = await Product.findAll();
     res.status(201).json({ product });
   } catch (err) {
-    next();
+    next(err);
+  }
+};
+
+exports.updateProduct = async (req, res, next) => {
+  try {
+  } catch (err) {
+    next(err);
   }
 };
