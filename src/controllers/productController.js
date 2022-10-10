@@ -16,7 +16,7 @@ exports.createProduct = async (req, res, next) => {
     if (file) {
       const secureUrl = await cloudinary.upload(
         file.path,
-        productImage ? cloudinary.getPublicId(productImage) : null
+        productImage ? cloudinary.getPublicId(productImage) : undefined
       );
 
       productImage = secureUrl;
@@ -78,7 +78,7 @@ exports.updateProduct = async (req, res, next) => {
     if (file) {
       const secureUrl = await cloudinary.upload(
         file.path,
-        productImage ? cloudinary.getPublicId(productImage) : null
+        productImage ? cloudinary.getPublicId(productImage) : undefined
       );
 
       productImage = secureUrl;
