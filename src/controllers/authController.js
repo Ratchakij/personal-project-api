@@ -73,6 +73,7 @@ exports.login = async (req, res, next) => {
     if (!isCorrect) {
       throw new AppError("Email/Password is invalid", 400);
     }
+
     const token = genToken({ id: user.id });
     res.status(200).json({ token });
   } catch (err) {

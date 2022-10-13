@@ -1,7 +1,6 @@
 const express = require("express");
 
 const productController = require("../controllers/productController");
-const authenticate = require("../middlewares/authenticate");
 const upload = require("../middlewares/upload");
 
 const router = express.Router(); // สร้าง router object

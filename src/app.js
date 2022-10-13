@@ -8,9 +8,10 @@ const productRoute = require("./routes/productRoute");
 
 const notFound = require("./middlewares/notFound");
 const error = require("./middlewares/error");
+const authenticate = require("./middlewares/authenticate");
 
 // const { sequelize } = require("./models");
-// sequelize.sync({ force: true });
+// sequelize.sync({ alter: true });
 
 const app = express();
 
